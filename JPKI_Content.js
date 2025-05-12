@@ -52,7 +52,7 @@ async function handleCertRequest(request) {
  
    // Description
    const description = document.createElement("p");
-   description.textContent = `Please select your ${certType.toLowerCase()} certificate file (.cer or .pem format)`;
+   description.textContent = `Please select your ${certType.toLowerCase()} certificate file (.cer)`;
    description.style.margin = "0 0 20px 0";
    description.style.color = "#666";
    content.appendChild(description);
@@ -60,7 +60,7 @@ async function handleCertRequest(request) {
    // Create file input
    const input = document.createElement("input");
    input.type = "file";
-   input.accept = ".cer,.pem";
+   input.accept = ".cer";
    input.style.display = "block";
    input.style.margin = "0 auto 20px";
    
@@ -105,35 +105,18 @@ async function handleCertRequest(request) {
  * @returns
  */
 async function processCertificate(file, isSigning) {
-   if (file.name.endsWith(".pem")) {
-      // PEM format - already base64, just remove headers and whitespace
-      const pemText = await file.text();
-      const base64Cert = pemText
-        .replace(/-----BEGIN CERTIFICATE-----/g, "")
-        .replace(/-----END CERTIFICATE-----/g, "")
-        .replace(/\s+/g, "");
-      
-      return {
-        result: "0",
-        certificate: base64Cert,  // Use directly without decode/re-encode
-        errcode: "",
-      };
-    }
+  // Read and convert certificate
+  const buffer = await file.arrayBuffer();
+  const derBytes = new Uint8Array(buffer);
 
-  if (file.name.endsWith(".cer")) {
-    // Read and convert certificate
-    const buffer = await file.arrayBuffer();
-    const derBytes = new Uint8Array(buffer);
+  // Convert to Base64 without headers
+  const base64Cert = btoa(String.fromCharCode(...derBytes));
 
-    // Convert to Base64 without headers
-    const base64Cert = btoa(String.fromCharCode(...derBytes));
-
-    return {
-      result: "0",
-      certificate: base64Cert,
-      errcode: "",
-    };
-  }
+  return {
+    result: "0",
+    certificate: base64Cert,
+    errcode: "",
+  };
 }
 
 function sendCertResponse(data, isSigning) {
