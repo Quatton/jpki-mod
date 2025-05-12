@@ -88,9 +88,9 @@ async function handleCertRequest(request) {
      if (!file) return;
  
      try {
-       const certData = await processCertificate(file, isSigningCert);
+       const certData = await processCertificate(file);
        document.body.removeChild(dialog);
-       sendCertResponse(certData, isSigningCert);
+       sendCertResponse(certData);
      } catch (error) {
        document.body.removeChild(dialog);
        sendErrorResponse(error);
@@ -104,7 +104,7 @@ async function handleCertRequest(request) {
  * @param {boolean} isSigning
  * @returns
  */
-async function processCertificate(file, isSigning) {
+async function processCertificate(file) {
   // Read and convert certificate
   const buffer = await file.arrayBuffer();
   const derBytes = new Uint8Array(buffer);
@@ -119,27 +119,12 @@ async function processCertificate(file, isSigning) {
   };
 }
 
-function sendCertResponse(data, isSigning) {
+function sendCertResponse(data) {
   const responseEvent = new CustomEvent("recvJPKIMsg", {
     detail: JSON.stringify(data),
   });
 
-  // Dispatch to appropriate handler
-  if (isSigning) {
-    document.dispatchEvent(responseEvent);
-    // Auto-trigger user cert flow after signing cert
-    setTimeout(
-      () =>
-        handleCertRequest({
-          mode: "11",
-          keypair_division: "02",
-          certificate_type: "01",
-        }),
-      100
-    );
-  } else {
-    document.dispatchEvent(responseEvent);
-  }
+  document.dispatchEvent(responseEvent);
 }
 
 function sendErrorResponse(error) {
