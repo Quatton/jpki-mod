@@ -39,6 +39,7 @@ If possible, I would like to make an NFC tag reader that can read the IC card fr
 - JPKI利用者ソフト for Android/iOS (iOS not tested)
 - Your phone must has an NFC reader
 - My Number Card
+- All other documents that you need to prepare for your type of application
 
 [Download Here](https://www.jpki.go.jp/download)
 Just follow your common sense and find the keyword "Windows" or "Mac" etc. and click the big button to download.
