@@ -1,0 +1,28 @@
+{
+"update_url": "https://clients2.google.com/service/update2/crx",
+
+   "name":"利用者クライアントソフト Edge/Chrome",
+   "description":"JPKIポータルサイトからダウンロードできる利用者クライアントソフトと組み合わせて動作し、マイナンバーカードに搭載された電子証明書（署名用電子証明書及び利用者証明用電子証明書）を利用する機能を提供します。",
+   "manifest_version": 3,
+   "version":"1.0.1.0",
+   "action" : {
+      "default_icon" : {
+         "38": "images/icon38.png"
+       }
+   },
+   "icons": {
+      "16":  "images/icon16.png",
+      "48":  "images/icon48.png",
+      "128": "images/icon128.png"
+   },
+   "content_scripts": [{
+      "matches": ["http://*/*","https://*/*"],
+      "js": ["JPKI_Content.js"]
+   }],
+   "background": {
+      "service_worker": "JPKI_Background.js"
+   },
+   "permissions": [
+      "nativeMessaging"
+   ]
+}
