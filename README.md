@@ -35,14 +35,13 @@ If possible, I would like to make an NFC tag reader that can read the IC card fr
 
 ### Pre-requisites
 - Chrome
-- JPKI利用者ソフト for Mac/Windows
 - JPKI利用者ソフト for Android/iOS (iOS not tested)
 - Your phone must has an NFC reader
 - My Number Card
 - All other documents that you need to prepare for your type of application
 
 [Download Here](https://www.jpki.go.jp/download)
-Just follow your common sense and find the keyword "Windows" or "Mac" etc. and click the big button to download.
+Just follow your common sense and find the keyword "Android" "iOS" etc. and click the big button to download. Or search for "JPKI利用者ソフト" on the app store or play store.
 
 ### Extension Installation
 
