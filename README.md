@@ -43,6 +43,8 @@ If possible, I would like to make an NFC tag reader that can read the IC card fr
 [Download Here](https://www.jpki.go.jp/download)
 Just follow your common sense and find the keyword "Android" "iOS" etc. and click the big button to download. Or search for "JPKI利用者ソフト" on the app store or play store.
 
+> [!CAUTION] The certificate has quite long expiration. To keep your key safe, delete the keys after one use. You can always create a new one, but it takes one time for a bad actor to impersonate you on these services.
+
 ### Extension Installation
 
 Download this entire repository and extract it somewhere. Then open Chrome and go to `chrome://extensions/` and enable developer mode. Click on "Load unpacked" and select the folder where you extracted the repository.
